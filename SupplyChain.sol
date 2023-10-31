@@ -21,6 +21,11 @@ contract ProductSupplyChain is Ownable(msg.sender) {
     // Mapping to store Product instances by their productId
     mapping(uint256 => Product) public products;
 
+    modifier onlyOwner() virtual override {
+        _checkOwner();
+        _;
+    }
+
     // Events
     event ProductCreated(uint256 productId, string name, address creator, uint256 price);
     event ProductSold(uint256 productId, address seller, address buyer, uint256 price);
